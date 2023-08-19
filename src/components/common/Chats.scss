@@ -1,3 +1,54 @@
 .ChatsComponent {
-  
+  background: #080808;
+
+  .header{
+    height: 60px;
+    border-bottom:1px solid black;
+    
+    display: flex;
+    gap:12px;
+    align-items: center;
+    padding: 0 12px;
+
+    .dp{
+      height: 2.5rem;
+      min-width: 2.5rem;
+      background: #1a1a1a;
+      border-radius: 100%;
+
+    }
+    .search{
+      height:2.5rem;
+      width: 100%;
+      background-color: #1a1a1a;
+      border-radius: 10px;
+    }
+  }
+
+  .chats{
+    .chatCard{
+      width: 100%;
+      
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      padding: .5rem 10px;
+      border-bottom: 1px solid black;
+      cursor: pointer; 
+      
+      &.active,&:hover {
+        background: #1a1a1a;
+      }
+
+      .profile{
+        height: 3rem;
+        aspect-ratio: 1;
+
+        background: #1a1a1a;
+        border-radius: 100%;
+
+      }
+    }
+  }
 }
