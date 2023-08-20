@@ -61,7 +61,160 @@ export default function Chat(props) {
 					<i className="fi fi-rr-time-delete"></i>
 				</div>
 			</div>
-			<div className="message-area"></div>
+			<div className="messages-area">
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message right">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">hello</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+				<div className="message left">
+					{/* <div className="tagged-message"></div> */}
+					<div className="wrapper">
+						<div className="content">
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Molestiae, hic in facilis mollitia fuga veritatis itaque quisquam
+							facere eum inventore dolores sapiente amet alias aspernatur ad
+							omnis assumenda minus libero!
+						</div>
+						<div className="time">3:25 PM</div>
+					</div>
+				</div>
+			</div>
 			<div className="footer">
 				<div className="wrapper">
 					<div className="action">

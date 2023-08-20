@@ -44,6 +44,9 @@
 	display: grid;
 	grid-template-rows: min-content 1fr min-content;
 
+	height: 100vh;
+	overflow-y: auto;
+
 	.action {
 		width: 2.4rem;
 		height: 2.4rem;
@@ -100,6 +103,53 @@
 	}
 
 	.messages-area {
+		padding: 1rem 3.5rem;
+
+		// display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+
+		height: 100%;
+		overflow-y: auto;
+
+		.message {
+			display: flex;
+			margin-top: 0.3rem;
+
+			.wrapper {
+				width: fit-content;
+				max-width: 40vw;
+
+				border-radius: 0.75rem;
+				padding: 0.6rem 0.8rem;
+
+				// gap: 1rem;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: flex-end;
+
+				.time {
+					font-size: 0.7rem;
+					opacity: 0.5;
+					margin-top: 6px;
+					margin-left: 1rem;
+				}
+			}
+
+			&.left {
+				.wrapper {
+					background: #1a1a1a;
+				}
+			}
+
+			&.right {
+				justify-content: flex-end;
+
+				.wrapper {
+					background: #325a88;
+				}
+			}
+		}
 	}
 
 	.footer {
@@ -128,6 +178,20 @@
 				border: none;
 				outline: none;
 				font-size: 1rem;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.ChatComponent {
+		.messages-area {
+			padding: 1rem;
+
+			.message {
+				.wrapper {
+					max-width: 75vw;
+				}
 			}
 		}
 	}
