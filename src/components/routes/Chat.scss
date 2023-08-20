@@ -167,18 +167,20 @@
 
 			padding: 1rem;
 
+			
 			.wrapper {
 				gap: 0.6rem;
 				display: grid;
 				align-items: center;
 				grid-template-columns: 2.5rem 1fr repeat(2, 2.5rem);
-
+				
 				height: 55px;
 				width: 100%;
 				padding: 0 12px;
 				background: #080808;
-
+				
 				border-radius: 1.5rem;
+				border: 1px solid #eeeeee0e;
 
 				input {
 					width: 100%;
