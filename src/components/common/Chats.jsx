@@ -7,8 +7,6 @@ export default function Chats(props) {
 
   return (
     <div className="ChatsComponent">
-      <img src="" alt="" />
-
       <div className="header">
         <div className="dp"></div>
         <div className="search"></div>
