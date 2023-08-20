@@ -28,16 +28,17 @@
 		top: 0;
 		left: 0;
 
+		opacity: 7%;
+
+		background: rgb(2, 0, 36);
 		background: linear-gradient(
-			135deg,
-			hsl(0deg 0% 0%) 0%,
-			hsl(344deg 0% 37%) 13%,
-			hsl(344deg 0% 78%) 31%,
-			hsl(344deg 0% 78%) 60%,
-			hsl(344deg 0% 37%) 84%,
-			hsl(0deg 0% 0%) 100%
+			270deg,
+			rgba(2, 0, 36, 1) 0%,
+			rgba(251, 251, 251, 1) 21%,
+			rgba(255, 255, 255, 1) 56%,
+			rgba(0, 0, 0, 1) 100%,
+			rgba(0, 212, 255, 1) 100%
 		);
-		opacity: 0.05;
 
 		z-index: 1;
 	}
@@ -167,18 +168,17 @@
 
 			padding: 1rem;
 
-			
 			.wrapper {
 				gap: 0.6rem;
 				display: grid;
 				align-items: center;
 				grid-template-columns: 2.5rem 1fr repeat(2, 2.5rem);
-				
+
 				height: 55px;
 				width: 100%;
 				padding: 0 12px;
 				background: #080808;
-				
+
 				border-radius: 1.5rem;
 				border: 1px solid #eeeeee0e;
 

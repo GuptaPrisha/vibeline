@@ -1,32 +1,33 @@
 .NoChatComponent {
-  line-height: 0;
+	line-height: 0;
 
-  position: relative;
+	position: relative;
 
-  img {
-    width: 100%;
-    height: 100%;
+	img {
+		width: 100%;
+		height: 100%;
 
-    object-fit: cover;
-    opacity: 0.15;
-  }
-  .background {
-    width: 100%;
-    height: 100%;
+		object-fit: cover;
+		opacity: 0.15;
+	}
+	.background {
+		width: 100%;
+		height: 100%;
 
-    position: absolute;
-    top: 0;
-    left: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
 
-    background: linear-gradient(
-      135deg,
-      hsl(0deg 0% 0%) 0%,
-      hsl(344deg 0% 37%) 13%,
-      hsl(344deg 0% 78%) 31%,
-      hsl(344deg 0% 78%) 60%,
-      hsl(344deg 0% 37%) 84%,
-      hsl(0deg 0% 0%) 100%
-    );
-    opacity: 0.1;
-  }
+		opacity: 7%;
+
+		background: rgb(2, 0, 36);
+		background: linear-gradient(
+			270deg,
+			rgba(2, 0, 36, 1) 0%,
+			rgba(251, 251, 251, 1) 21%,
+			rgba(255, 255, 255, 1) 56%,
+			rgba(0, 0, 0, 1) 100%,
+			rgba(0, 212, 255, 1) 100%
+		);
+	}
 }
