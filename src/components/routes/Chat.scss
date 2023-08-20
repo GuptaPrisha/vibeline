@@ -1,3 +1,5 @@
+
+
 .ChatComponent {
 	// line-height: 0;
 
@@ -82,6 +84,10 @@
 			height: 60px;
 			padding: 0 12px;
 			background: #080808;
+
+			input {
+				color: #080808;
+			}
 
 			.dp {
 				width: 2.4rem;
