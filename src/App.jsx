@@ -6,14 +6,17 @@ import Chat from "./components/routes/Chat";
 import Chats from "./components/common/Chats";
 import { useEffect, useState } from "react";
 import { socket } from "./lib/constants";
+import Login from "./components/routes/Login";
 
 function App() {
-  const [id, setId] = useState("");
-  const [userID, setUserID] = useState("");
+  const [id, setId] = useState();
+  const [userID, setUserID] = useState(localStorage.getItem("userID"));
 
   useEffect(() => {
     socket.emit("join", { userID: userID });
   }, [userID]);
+
+  if (!userID) return <Login setUserID={setUserID} />;
 
   return (
     <BrowserRouter>
