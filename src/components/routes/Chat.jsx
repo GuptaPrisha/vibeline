@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Background from "../../assets/pic.png";
 import { socket } from "../../lib/constants";
+import { nanoid } from "nanoid";
 
 // props: { userID: string, setId: Function }
 export default function Chat(props) {
@@ -19,6 +20,21 @@ export default function Chat(props) {
   });
 
   const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:4000/chatMessages", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id,
+      }),
+    }).then(async (res) => {
+      if (res.status !== 200) return;
+      const data = await res.json();
+      setMessages(data.messages);
+    });
+  }, [id]);
 
   useEffect(() => {
     // listen for the messages
@@ -46,7 +62,7 @@ export default function Chat(props) {
     return () => {
       socket.off("recvMessage");
     };
-  }, [messages]);
+  }, [messages]); /// ek bar look at it thik h??kaha??
 
   const [currentMessage, setCurrentMessage] = useState("");
 
@@ -89,23 +105,18 @@ export default function Chat(props) {
         </div>
         <div className="messages-area">
           {messages.map((message) => {
-            if (message.recieverID === props.userID) {
-              return (
-                <div className="message left">
-                  {/* <div className="tagged-message"></div> */}
-                  <div className="wrapper">
-                    <div className="content">{message.message}</div>
-                    <div className="time">{message.time}</div>
-                  </div>
-                </div>
-              );
-            }
+            console.log(message);
             return (
-              <div className="message right">
+              <div
+                key={message.id}
+                className={`message ${
+                  message.recieverID === props.userID ? "left" : "right"
+                }`}
+              >
                 {/* <div className="tagged-message"></div> */}
                 <div className="wrapper">
-                  <div className="content">{message.message}</div>
-                  <div className="time">{message.time}</div>
+                  <div className="content">{message.text}</div>
+                  <div className="time">{message.dateCreated}</div>
                 </div>
               </div>
             );
@@ -118,6 +129,7 @@ export default function Chat(props) {
             </div>
             <div className="input">
               <input
+                autoFocus
                 type="text"
                 placeholder="Type a message"
                 value={currentMessage}
@@ -138,19 +150,16 @@ export default function Chat(props) {
               id="send-btn"
               className="action"
               onClick={() => {
-                socket.emit("sendMessage", {
-                  message: currentMessage,
+                const msg = {
+                  id: nanoid(15),
+                  text: currentMessage,
+                  chatID: id,
+                  senderID: props.userID,
                   recieverID: recieverID,
-                  time: Date.now(),
-                });
-                setMessages([
-                  ...messages,
-                  {
-                    message: currentMessage,
-                    recieverID: recieverID,
-                    time: Date.now(),
-                  },
-                ]);
+                  dateCreated: Date.now(),
+                };
+                socket.emit("sendMessage", msg);
+                setMessages([...messages, msg]);
                 setCurrentMessage("");
               }}
             >
