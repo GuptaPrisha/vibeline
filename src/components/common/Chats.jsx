@@ -36,6 +36,16 @@ export default function Chats(props) {
   }, [props.userID]);
 
   useEffect(() => {
+    socket.on("chatCreated", () => {
+      socket.emit("sendChats", { userID: props.userID });
+    });
+
+    return () => {
+      socket.off("chatCreated");
+    };
+  }, []);
+
+  useEffect(() => {
     socket.emit("sendChats", { userID: props.userID });
     socket.on("chats", (data) => {
       setChats(data);
@@ -59,7 +69,13 @@ export default function Chats(props) {
           <div
             className="action"
             onClick={() => {
-              
+              const username = prompt("enter username", "someone")?.trim();
+              if (!username) return;
+
+              socket.emit("newChat", {
+                userID: props.userID,
+                username: username,
+              });
             }}
           >
             <i className="fi fi-rr-edit"></i>
