@@ -54,6 +54,7 @@ export default function Chat(props) {
   }, [recieverID]);
 
   useEffect(() => {
+    //we off the componet first on the rerendering then it will b mounted again
     socket.off("recvMessage");
     socket.on("recvMessage", (data) => {
       setMessages([...messages, data]);
@@ -62,11 +63,9 @@ export default function Chat(props) {
     return () => {
       socket.off("recvMessage");
     };
-  }, [messages]); /// ek bar look at it thik h??kaha??
+  }, [messages]);
 
   const [currentMessage, setCurrentMessage] = useState("");
-
-  console.log(messages);
 
   return (
     <div className="ChatComponent">
@@ -105,7 +104,6 @@ export default function Chat(props) {
         </div>
         <div className="messages-area">
           {messages.map((message) => {
-            console.log(message);
             return (
               <div
                 key={message.id}

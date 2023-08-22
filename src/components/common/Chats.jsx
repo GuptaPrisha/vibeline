@@ -1,21 +1,64 @@
 import "./Chats.scss";
 
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { socket } from "../../lib/constants";
 
 /// a, b, c -> client emit (socket.emit), serven listen (socket.on)
 /// d, e, f -> server emit (socket.emit), client listen (socket.on)
 
+// -> 1
+// -> 1 + 1 = 2
+// -> 1 + 1 + 1 = 3
+
+// -> 1
+// !> 1 - 1 = 0
+// -> 1
+// !> 1 - 1 = 0
+// -> 1
+
 export default function Chats(props) {
   const navigate = useNavigate();
+  const [chats, setChats] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    socket.off("user");
+    socket.emit("sendUser", { token: localStorage.getItem("token") });
+    socket.on("user", (data) => {
+      if (data.status !== 200) {
+        localStorage.clear();
+        props.setUserID(null);
+        return;
+      }
+      const user = data.user;
+      setUser(user);
+    });
+
+    () => {
+      return socket.off("user");
+    };
+  }, [props.userID]);
+
+  useEffect(() => {
+    socket.emit("sendChats", { userID: props.userID });
+    socket.on("chats", (data) => {
+      setChats(data);
+      console.log(data);
+    });
+    //for unmount use callback
+    return () => {
+      socket.off("chats");
+    };
+  }, []);
+
+  if (!user) return null;
 
   return (
     <div className="ChatsComponent">
       <div className="header">
         <div className="dp">
-          <img
-            src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-            alt=""
-          />
+          <img src={user.dp} alt="" />
         </div>
         <div className="search">
           <input type="text" placeholder="Search" />
@@ -31,24 +74,25 @@ export default function Chats(props) {
       </div>
       <div className="chats">
         {props.userID}
-        <div
-          className={`chatCard ${props.id === "1" ? "active" : ""}`}
-          onClick={() => {
-            navigate("/1");
-          }}
-        >
-          <div className="profile"></div>
-          <div className="name">Chat 1</div>
-        </div>
-        <div
-          className={`chatCard ${props.id === "2" ? "active" : ""}`}
-          onClick={() => {
-            navigate("/2");
-          }}
-        >
-          <div className="profile"></div>
-          <div className="name">Chat 2</div>
-        </div>
+
+        {!chats ? (
+          <p>connect to people to start chatting</p>
+        ) : (
+          chats.map((chat) => {
+            return (
+              <div
+                className={`chatCard ${props.id === chat.id ? "active" : ""}`}
+                key={chat.id}
+                onClick={() => {
+                  navigate("/" + chat.id);
+                }}
+              >
+                <div className="profile"></div>
+                {/* <div className="name">{chat.participants.filter()}</div> */}
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

@@ -4,8 +4,8 @@ import { useState } from "react";
 import logo from "../../assets/logo.svg";
 
 export default function Login(props) {
-  const [username, setUsername] = useState("user@gmail.com");
-  const [password, setPassword] = useState("userpassword");
+  const [username, setUsername] = useState("username");
+  const [password, setPassword] = useState("Hello@123");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
