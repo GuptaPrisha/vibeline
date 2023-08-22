@@ -73,8 +73,6 @@ export default function Chats(props) {
         </div>
       </div>
       <div className="chats">
-        {props.userID}
-
         {!chats ? (
           <p>connect to people to start chatting</p>
         ) : (
@@ -87,8 +85,15 @@ export default function Chats(props) {
                   navigate("/" + chat.id);
                 }}
               >
-                <div className="profile"></div>
-                {/* <div className="name">{chat.participants.filter()}</div> */}
+                <div className="profile">
+                  <img src={chat.participants[0].dp} alt="dp" />
+                </div>
+                <div className="box">
+                  <div className="name">{chat.participants[0].name}</div>
+                  <div className="username">
+                    {chat.participants[0].username}
+                  </div>
+                </div>
               </div>
             );
           })
