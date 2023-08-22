@@ -1,25 +1,45 @@
 import "./Chat.scss";
 
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Background from "../../assets/pic.png";
 import { socket } from "../../lib/constants";
 import { nanoid } from "nanoid";
 
+function timestamp2String(ts) {
+  const date = new Date(ts);
+  return `${date.getHours()}:${
+    date.getMinutes() > 9 ? date.getMinutes() : "0" + date.getMinutes()
+  }`;
+}
+
 // props: { userID: string, setId: Function }
 export default function Chat(props) {
   const id = useParams().id;
+  const navigate = useNavigate();
+
+  const [currentMessage, setCurrentMessage] = useState("");
+  // anything that changes after first render, will be a state only rather than a plain variable
+  const [chat, setChat] = useState(null);
+
   useEffect(() => {
     props.setId(id);
+
+    socket.off("chat");
+    socket.emit("getChat", { chatID: id, userID: props.userID });
+    socket.on("chat", (chat) => {
+      setChat(chat);
+      console.log(chat);
+    });
+
+    return () => {
+      socket.off("chat");
+    };
   }, [id]);
 
-  // anything that changes after first render, will be a state only rather than a plain variable
-  const [chat, setChat] = useState({
-    id: "1",
-    participants: ["userID1", "userID2"],
-  });
-
   const [messages, setMessages] = useState([]);
+
+  // fetch out the chat history
   useEffect(() => {
     fetch("http://localhost:4000/chatMessages", {
       method: "POST",
@@ -36,25 +56,9 @@ export default function Chat(props) {
     });
   }, [id]);
 
+  // listen for the upcoming messages
   useEffect(() => {
-    // listen for the messages
-  }, [id]);
-
-  const [recieverID, setRecieverID] = useState("");
-  const [recieverProfile, setRecieverProfile] = useState(null);
-
-  useEffect(() => {
-    const id = chat.participants.filter((x) => x !== props.userID)[0];
-    setRecieverID(id);
-  }, [chat.participants, props.userID]);
-
-  useEffect(() => {
-    // listen for the reciever's profile
-    setRecieverProfile(null);
-  }, [recieverID]);
-
-  useEffect(() => {
-    //we off the componet first on the rerendering then it will b mounted again
+    // we off the componet first on the rerendering then it will b mounted again
     socket.off("recvMessage");
     socket.on("recvMessage", (data) => {
       setMessages([...messages, data]);
@@ -65,7 +69,7 @@ export default function Chat(props) {
     };
   }, [messages]);
 
-  const [currentMessage, setCurrentMessage] = useState("");
+  if (!chat) return null;
 
   return (
     <div className="ChatComponent">
@@ -75,30 +79,42 @@ export default function Chat(props) {
       <div className="chat">
         <div className="header">
           <div className="dp">
-            <img
-              src="https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-              alt=""
-            />
+            <img src={chat.participants[0].dp} alt="" />
           </div>
           <div className="info">
-            <div className="name">Reciever name</div>
-            <div className="status">typing...</div>
-            <input
-              type="text"
-              placeholder="reciever name"
-              value={recieverID}
-              onChange={(e) => {
-                setRecieverID(e.target.value);
-              }}
-            />
+            <div className="name">{chat.participants[0].name}</div>
+            <div className="status">{chat.participants[0].username}</div>{" "}
           </div>
           <div className="action">
             <i className="fi fi-rr-search"></i>
           </div>
-          <div className="action">
+          <div
+            className="action"
+            onClick={() => {
+              socket.emit("deleteChat", { chatID: chat.id });
+              navigate("/");
+            }}
+          >
             <i className="fi fi-rr-trash"></i>
           </div>
-          <div className="action">
+          <div
+            className="action"
+            onClick={() => {
+              setMessages([]);
+              fetch("http://localhost:4000/deleteMessages", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                  chatID: chat.id,
+                }),
+              }).then(async (res) => {
+                if (res.status !== 200) return;
+                console.log("deleted successfully");
+              });
+            }}
+          >
             <i className="fi fi-rr-time-delete"></i>
           </div>
         </div>
@@ -114,7 +130,9 @@ export default function Chat(props) {
                 {/* <div className="tagged-message"></div> */}
                 <div className="wrapper">
                   <div className="content">{message.text}</div>
-                  <div className="time">{message.dateCreated}</div>
+                  <div className="time">
+                    {timestamp2String(message.dateCreated)}
+                  </div>
                 </div>
               </div>
             );
@@ -153,7 +171,7 @@ export default function Chat(props) {
                   text: currentMessage,
                   chatID: id,
                   senderID: props.userID,
-                  recieverID: recieverID,
+                  recieverID: chat.participants[0]._id,
                   dateCreated: Date.now(),
                 };
                 socket.emit("sendMessage", msg);

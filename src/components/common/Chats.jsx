@@ -7,22 +7,16 @@ import { socket } from "../../lib/constants";
 /// a, b, c -> client emit (socket.emit), serven listen (socket.on)
 /// d, e, f -> server emit (socket.emit), client listen (socket.on)
 
-// -> 1
-// -> 1 + 1 = 2
-// -> 1 + 1 + 1 = 3
-
-// -> 1
-// !> 1 - 1 = 0
-// -> 1
-// !> 1 - 1 = 0
-// -> 1
-
 export default function Chats(props) {
+  //chat navigation
   const navigate = useNavigate();
   const [chats, setChats] = useState([]);
+
+  //user info is need here only and userid is already global
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    //this will chnage on change of userid first->off then on to avoide duplicate listners
     socket.off("user");
     socket.emit("sendUser", { token: localStorage.getItem("token") });
     socket.on("user", (data) => {
@@ -35,8 +29,9 @@ export default function Chats(props) {
       setUser(user);
     });
 
-    () => {
-      return socket.off("user");
+    //callback is provided for the time of unmounting of function
+    return () => {
+      socket.off("user");
     };
   }, [props.userID]);
 
@@ -44,7 +39,6 @@ export default function Chats(props) {
     socket.emit("sendChats", { userID: props.userID });
     socket.on("chats", (data) => {
       setChats(data);
-      console.log(data);
     });
     //for unmount use callback
     return () => {
@@ -65,7 +59,7 @@ export default function Chats(props) {
           <div
             className="action"
             onClick={() => {
-              props.setUserID(prompt("Username"));
+              
             }}
           >
             <i className="fi fi-rr-edit"></i>
@@ -73,7 +67,7 @@ export default function Chats(props) {
         </div>
       </div>
       <div className="chats">
-        {!chats ? (
+        {!chats.length ? (
           <p>connect to people to start chatting</p>
         ) : (
           chats.map((chat) => {
