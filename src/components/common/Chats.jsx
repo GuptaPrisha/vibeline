@@ -120,6 +120,7 @@ export default function Chats(props) {
 				</div>
 			</div>
 			<div className="chats">
+				<div className="user-name">{user?.name}</div>
 				{!filteredChats.length ? (
 					<p>connect to people to start chatting</p>
 				) : (

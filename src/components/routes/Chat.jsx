@@ -82,7 +82,7 @@ export default function Chat(props) {
 					</div>
 					<div className="info">
 						<div className="name">{chat.participants[0].name}</div>
-						<div className="status">{chat.participants[0].username}</div>{" "}
+						<div className="status">@{chat.participants[0].username}</div>{" "}
 					</div>
 					{chat.participants[0].mobileNo ? (
 						<div

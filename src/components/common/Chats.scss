@@ -69,6 +69,13 @@
 	}
 
 	.chats {
+		.user-name {
+			opacity: 0.5;
+			font-size: 0.9rem;
+			padding: 10px 15px;
+			margin-bottom: 0.5rem;
+		}
+
 		.chatCard {
 			width: 100%;
 
