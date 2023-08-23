@@ -147,9 +147,9 @@ export default function Chat(props) {
 				</div>
 				<div className="footer">
 					<div className="wrapper">
-						<div className="action">
+						{/* <div className="action">
 							<i className="fi fi-rr-clip"></i>
-						</div>
+						</div> */}
 						<div className="input">
 							<input
 								autoFocus
@@ -166,9 +166,9 @@ export default function Chat(props) {
 								}}
 							/>
 						</div>
-						<div className="action">
+						{/* <div className="action">
 							<i className="fi fi-rr-grin-alt"></i>
-						</div>
+						</div> */}
 						<div
 							id="send-btn"
 							className="action"
