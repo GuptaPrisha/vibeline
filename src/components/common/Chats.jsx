@@ -105,6 +105,14 @@ export default function Chats(props) {
 					<div
 						className="action"
 						onClick={() => {
+							props.setShowContacts(true)
+						}}
+					>
+						<i className="fi fi-rr-users"></i>
+					</div>
+					<div
+						className="action"
+						onClick={() => {
 							const username = prompt("enter username", "someone")?.trim()
 							if (!username) return
 
