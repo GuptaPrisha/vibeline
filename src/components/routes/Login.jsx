@@ -118,7 +118,7 @@ export default function Login(props) {
 						className="button"
 						onClick={() => {
 							if (isLogin) {
-								fetch("http://localhost:4000/auth/login", {
+								fetch("https://vibeline-auth.onrender.com/auth/login", {
 									method: "POST",
 									headers: {
 										"content-type": "application/json",
@@ -140,7 +140,7 @@ export default function Login(props) {
 									}
 								})
 							} else {
-								fetch("http://localhost:4000/auth/signup", {
+								fetch("https://vibeline-auth.onrender.com/auth/signup", {
 									method: "POST",
 									headers: {
 										"content-type": "application/json",

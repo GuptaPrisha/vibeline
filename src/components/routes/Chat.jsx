@@ -40,7 +40,7 @@ export default function Chat(props) {
 
 	// fetch out the chat history
 	useEffect(() => {
-		fetch("http://localhost:4000/chatMessages", {
+		fetch("https://vibeline-auth.onrender.com/chatMessages", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
@@ -109,7 +109,7 @@ export default function Chat(props) {
 						className="action"
 						onClick={() => {
 							setMessages([])
-							fetch("http://localhost:4000/deleteMessages", {
+							fetch("https://vibeline-auth.onrender.com/deleteMessages", {
 								method: "POST",
 								headers: {
 									"content-type": "application/json",
