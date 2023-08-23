@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Chats from "./components/common/Chats"
 import AddContact from "./components/modals/AddContact"
 import Contacts from "./components/modals/Contacts"
+import CreateChat from "./components/modals/CreateChat"
 import Chat from "./components/routes/Chat"
 import Login from "./components/routes/Login"
 import NoChat from "./components/routes/NoChat"
@@ -15,6 +16,7 @@ function App() {
 	const [userID, setUserID] = useState(localStorage.getItem("userID"))
 	const [contactsModal, setShowContactsModal] = useState(false)
 	const [showAddContactsModal, setShowAddContactsModal] = useState(false)
+	const [createChatModal, setCreateChatModal] = useState(false)
 
 	useEffect(() => {
 		if (!userID) return
@@ -39,12 +41,18 @@ function App() {
 					show={showAddContactsModal}
 					setShow={setShowAddContactsModal}
 				/>
+				<CreateChat
+					userID={userID}
+					show={createChatModal}
+					setShow={setCreateChatModal}
+				/>
 				{/* chats will never change on routing that is why it is outside the routes */}
 				<Chats
 					id={chatID}
 					userID={userID}
 					setUserID={setUserID}
 					setShowContacts={setShowContactsModal}
+					setShowCreateChat={setCreateChatModal}
 				/>
 				<Routes>
 					<Route path="/" element={<NoChat />} />

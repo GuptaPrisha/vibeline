@@ -62,7 +62,7 @@ export default function Chats(props) {
 
 	useEffect(() => {
 		socket.on("chatCreated", (data) => {
-			navigate("/" + data.chatID)
+			navigate("/" + data)
 			socket.emit("sendChats", { userID: props.userID })
 		})
 
@@ -82,8 +82,6 @@ export default function Chats(props) {
 		}
 	}, [])
 
-	if (!user) return null
-
 	return (
 		<div className="ChatsComponent">
 			<div className="header">
@@ -94,7 +92,7 @@ export default function Chats(props) {
 						localStorage.clear()
 					}}
 				>
-					<img src={user.dp} alt="" />
+					{user ? <img src={user.dp} alt="" /> : null}
 				</div>
 				<div className="search">
 					<input
@@ -114,13 +112,7 @@ export default function Chats(props) {
 					<div
 						className="action"
 						onClick={() => {
-							const username = prompt("enter username", "someone")?.trim()
-							if (!username) return
-
-							socket.emit("newChat", {
-								userID: props.userID,
-								username: username,
-							})
+							props.setShowCreateChat(true)
 						}}
 					>
 						<i className="fi fi-rr-edit"></i>
