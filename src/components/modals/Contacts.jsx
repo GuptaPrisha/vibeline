@@ -36,7 +36,6 @@ export default function Contacts(props) {
 		socket.off("user")
 		socket.emit("sendUser", { token: localStorage.getItem("token") })
 		socket.on("user", (data) => {
-			console.log(data)
 			if (data.status !== 200) {
 				localStorage.clear()
 				props.setUserID(null)
@@ -122,7 +121,52 @@ export default function Contacts(props) {
 								<span>Select a contact to view info</span>
 							</div>
 						)}
-						{activeContact && <div className="title">Contact info</div>}
+						{activeContact && (
+							<div className="contact">
+								<div className="profile">
+									<img src={activeContact.dp} alt="dp" />
+								</div>
+								<div className="info">
+									<div className="name">{activeContact.name}</div>
+									<div className="username">@{activeContact.username}</div>
+
+									<div className="actions">
+										<div
+											className="action"
+											onClick={() => {
+												window.open(`tel:${activeContact.mobileNo}`)
+											}}
+										>
+											<i className="fi fi-rr-phone-call"></i>
+											<span>Call</span>
+										</div>
+										<div
+											className="action"
+											onClick={() => {
+												window.open(`mailto:${activeContact.email}`)
+											}}
+										>
+											<i className="fi fi-rr-envelope"></i>
+											<span>Email</span>
+										</div>
+										<div
+											className="action"
+											onClick={() => {
+												socket.emit("newChat", {
+													userID: props.userID,
+													username: activeContact.username,
+												})
+												setActiveContact(null)
+												props.setShow(false)
+											}}
+										>
+											<i className="fi fi-rr-paper-plane"></i>
+											<span>Message</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

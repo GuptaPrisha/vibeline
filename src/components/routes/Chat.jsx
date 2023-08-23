@@ -29,7 +29,6 @@ export default function Chat(props) {
     socket.emit("getChat", { chatID: id, userID: props.userID });
     socket.on("chat", (chat) => {
       setChat(chat);
-      console.log(chat);
     });
 
     return () => {
@@ -111,7 +110,6 @@ export default function Chat(props) {
                 }),
               }).then(async (res) => {
                 if (res.status !== 200) return;
-                console.log("deleted successfully");
               });
             }}
           >

@@ -10,9 +10,8 @@ export default function Login(props) {
 	const [password, setPassword] = useState("Hello@123")
 	const [phone, setPhone] = useState("123456890")
 
-	const [isLogin, setIsLogin] = useState(true)
-
 	const [error, setError] = useState("")
+	const [isLogin, setIsLogin] = useState(true)
 
 	return (
 		<div className="LoginComponent Route">
@@ -168,22 +167,6 @@ export default function Login(props) {
 						}}
 					>
 						{isLogin ? "Login" : "Signup"}
-					</div>
-				</div>
-				<div className="divider">
-					<div className="line"></div>
-					<span>or</span>
-					<div className="line"></div>
-				</div>
-				<div className="alternatives">
-					<div
-						className="alternative"
-						onClick={() => {
-							console.log("Logging with gOOgle")
-						}}
-					>
-						{/* <img src={GoogleLogo} alt="Logo" /> */}
-						<span>Continue with Google</span>
 					</div>
 				</div>
 			</div>

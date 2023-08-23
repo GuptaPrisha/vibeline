@@ -1,5 +1,5 @@
 .ContactsComponent {
-	.wrapper .content {
+	.wrapper > .content {
 		width: 60vw;
 		height: 60vh !important;
 
@@ -98,6 +98,73 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+			}
+
+			.contact {
+				padding: 30px;
+
+				gap: 1rem;
+				display: grid;
+				grid-template-columns: 200px 1fr;
+
+				.profile {
+					height: 200px;
+					aspect-ratio: 1;
+
+					background: #1a1a1a;
+					border-radius: 100%;
+
+					img {
+						height: 100%;
+						width: 100%;
+						border-radius: inherit;
+						object-fit: cover;
+					}
+				}
+
+				.info {
+					padding-top: 1rem;
+
+					.name {
+						font-size: 24px;
+						font-weight: 500;
+					}
+
+					.username {
+						margin-top: 6px;
+						font-size: 16px;
+						opacity: 0.5;
+					}
+
+					.actions {
+						gap: 0.75rem;
+						display: flex;
+						align-items: center;
+						margin-top: 2rem;
+
+						.action {
+							width: 100%;
+							border-radius: 1rem;
+
+							cursor: pointer;
+							background: #1a1a1a;
+
+							&:hover {
+								background: #252525;
+							}
+
+							gap: 0.6rem;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							padding: 1.5rem 0;
+
+							i {
+								font-size: 0.9rem;
+							}
+						}
+					}
+				}
 			}
 		}
 	}

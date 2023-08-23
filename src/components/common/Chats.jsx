@@ -61,7 +61,8 @@ export default function Chats(props) {
 	}, [props.userID])
 
 	useEffect(() => {
-		socket.on("chatCreated", () => {
+		socket.on("chatCreated", (data) => {
+			navigate("/" + data.chatID)
 			socket.emit("sendChats", { userID: props.userID })
 		})
 
