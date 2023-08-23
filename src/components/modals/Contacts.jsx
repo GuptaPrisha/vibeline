@@ -4,19 +4,45 @@ import "./Contacts.scss"
 import { useEffect, useState } from "react"
 
 export default function Contacts(props) {
+	const [searchQuery, setSearchQuery] = useState("")
 	const [contacts, setContacts] = useState([])
-	const [activeContactID, setActiveContactID] = useState(null)
+	const [filteredContacts, setFilteredContacts] = useState([])
+
+	const [activeContact, setActiveContact] = useState(null)
+
+	useEffect(() => {
+		if (!searchQuery.trim()) return setFilteredContacts(contacts)
+
+		const filtered = contacts.filter((contact) => {
+			return (
+				contact.name.toLowerCase().includes(searchQuery.trim().toLowerCase()) ||
+				contact.email
+					.toLowerCase()
+					.includes(searchQuery.trim().toLowerCase()) ||
+				contact?.mobileNo
+					?.toString()
+					.toLowerCase()
+					.includes(searchQuery.trim().toLowerCase()) ||
+				contact.username
+					.toLowerCase()
+					.includes(searchQuery.trim().toLowerCase())
+			)
+		})
+		setFilteredContacts(filtered)
+	}, [contacts, searchQuery])
 
 	useEffect(() => {
 		//this will chnage on change of userid first->off then on to avoide duplicate listners
 		socket.off("user")
 		socket.emit("sendUser", { token: localStorage.getItem("token") })
 		socket.on("user", (data) => {
+			console.log(data)
 			if (data.status !== 200) {
 				localStorage.clear()
 				props.setUserID(null)
 				return
 			}
+
 			setContacts(data.user.contacts)
 		})
 
@@ -24,7 +50,7 @@ export default function Contacts(props) {
 		return () => {
 			socket.off("user")
 		}
-	}, [props.userID])
+	}, [props.show])
 
 	if (!props.show) return null
 
@@ -33,6 +59,7 @@ export default function Contacts(props) {
 			<div
 				className="backdrop"
 				onClick={() => {
+					setActiveContact(null)
 					props.setShow(false)
 				}}
 			></div>
@@ -54,19 +81,27 @@ export default function Contacts(props) {
 					<div className="sidebar">
 						<div className="header">
 							<div className="search">
-								<input type="text" placeholder="Search contacts" />
+								<input
+									autoFocus
+									type="text"
+									placeholder="Search contacts"
+									value={searchQuery}
+									onChange={(e) => {
+										setSearchQuery(e.target.value)
+									}}
+								/>
 							</div>
 						</div>
 						<div className="contacts">
-							{contacts.map((contact) => {
+							{filteredContacts.map((contact) => {
 								return (
 									<div
 										className={`contact ${
-											activeContactID === contact.id ? "active" : ""
+											activeContact?._id === contact._id ? "active" : ""
 										}`}
-										key={contact.id}
+										key={contact._id}
 										onClick={() => {
-											setActiveContactID(contact.id)
+											setActiveContact(contact)
 										}}
 									>
 										<div className="profile">
@@ -82,8 +117,12 @@ export default function Contacts(props) {
 						</div>
 					</div>
 					<div className="main">
-						<div className="title">Contact info</div>
-						{activeContactID}
+						{!activeContact && (
+							<div className="no-contact">
+								<span>Select a contact to view info</span>
+							</div>
+						)}
+						{activeContact && <div className="title">Contact info</div>}
 					</div>
 				</div>
 			</div>

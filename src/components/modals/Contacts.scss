@@ -45,6 +45,59 @@
 			.contacts {
 				height: 100%;
 				overflow-y: auto;
+
+				.contact {
+					width: 100%;
+
+					display: flex;
+					gap: 14px;
+					align-items: center;
+
+					cursor: pointer;
+					padding: 0.5rem 14px;
+					border-bottom: 1px solid black;
+
+					&.active,
+					&:hover {
+						background: #1a1a1a;
+					}
+
+					.profile {
+						height: 3rem;
+						aspect-ratio: 1;
+
+						background: #1a1a1a;
+						border-radius: 100%;
+
+						img {
+							height: 100%;
+							width: 100%;
+							border-radius: inherit;
+							object-fit: cover;
+						}
+					}
+
+					.box {
+						.name {
+							font-size: 18px;
+							font-weight: 500;
+						}
+						.username {
+							margin-top: 3px;
+							font-size: 12px;
+							opacity: 0.5;
+						}
+					}
+				}
+			}
+		}
+
+		.main {
+			.no-contact {
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
 		}
 	}
