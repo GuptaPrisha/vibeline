@@ -38,7 +38,7 @@ export default function Contacts(props) {
 			></div>
 			<div className="wrapper">
 				<header>
-					<div className="title">Contacts Component</div>
+					<div className="title">Contacts</div>
 					<div className="actions">
 						<div
 							className="action"
@@ -52,7 +52,11 @@ export default function Contacts(props) {
 				</header>
 				<div className="content">
 					<div className="sidebar">
-						<div className="title">Contacts</div>
+						<div className="header">
+							<div className="search">
+								<input type="text" placeholder="Search contacts" />
+							</div>
+						</div>
 						<div className="contacts">
 							{contacts.map((contact) => {
 								return (
