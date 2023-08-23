@@ -70,7 +70,7 @@
 
     .main {
       padding: 2rem 0;
-
+      
       .divider {
         height: 8px;
       }
@@ -82,11 +82,12 @@
         padding: 14px 1.5rem;
         border-radius: 10px;
         background: var(--backgroundSlate4-color);
-        border: 1px solid var(--backgroundSlate3-color);
+        border: 1px solid #eeeeee2d;
 
         input {
           all: unset;
           width: 100%;
+
         }
 
         * {
