@@ -79,10 +79,13 @@ i {
 
 			.title {
 				font-weight: 500;
+				font-size: 1.1rem;
 			}
 
 			.actions {
 				gap: 0.5rem;
+				display: flex;
+				align-items: center;
 
 				.action {
 					width: 2.3rem;

@@ -40,14 +40,19 @@ export default function Contacts(props) {
 				<header>
 					<div className="title">Contacts Component</div>
 					<div className="actions">
-						<div className="action">
+						<div
+							className="action"
+							onClick={() => {
+								props.setShowAddContacts(true)
+							}}
+						>
 							<i className="fi fi-rr-plus"></i>
 						</div>
 					</div>
 				</header>
 				<div className="content">
 					<div className="sidebar">
-						<div className="title">All contacts</div>
+						<div className="title">Contacts</div>
 						<div className="contacts">
 							{contacts.map((contact) => {
 								return (
