@@ -11,6 +11,31 @@ export default function Chats(props) {
 	//chat navigation
 	const navigate = useNavigate()
 	const [chats, setChats] = useState([])
+	const [filteredChats, setFiteredChats] = useState([])
+	const [searchQuery, setSearchQuery] = useState("")
+
+	useEffect(() => {
+		if (!searchQuery.trim()) return setFiteredChats(chats)
+
+		const filtered = chats.filter((chat) => {
+			return (
+				chat.participants[0].name
+					.toLowerCase()
+					.includes(searchQuery.trim().toLowerCase()) ||
+				chat.participants[0].email
+					.toLowerCase()
+					.includes(searchQuery.trim().toLowerCase()) ||
+				chat.participants[0]?.mobileNo
+					?.toString()
+					.toLowerCase()
+					.includes(searchQuery.trim().toLowerCase()) ||
+				chat.participants[0].username
+					.toLowerCase()
+					.includes(searchQuery.trim().toLowerCase())
+			)
+		})
+		setFiteredChats(filtered)
+	}, [chats, searchQuery])
 
 	//user info is need here only and userid is already global
 	const [user, setUser] = useState(null)
@@ -71,7 +96,12 @@ export default function Chats(props) {
 					<img src={user.dp} alt="" />
 				</div>
 				<div className="search">
-					<input type="text" placeholder="Search" />
+					<input
+						type="text"
+						placeholder="Search"
+						value={searchQuery}
+						onChange={(e) => setSearchQuery(e.target.value)}
+					/>
 					<div
 						className="action"
 						onClick={() => {
@@ -89,10 +119,10 @@ export default function Chats(props) {
 				</div>
 			</div>
 			<div className="chats">
-				{!chats.length ? (
+				{!filteredChats.length ? (
 					<p>connect to people to start chatting</p>
 				) : (
-					chats.map((chat) => {
+					filteredChats.map((chat) => {
 						return (
 							<div
 								className={`chatCard ${props.id === chat.id ? "active" : ""}`}
