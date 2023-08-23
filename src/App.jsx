@@ -35,6 +35,7 @@ function App() {
 					setUserID={setUserID}
 				/>
 				<AddContact
+					userID={userID}
 					show={showAddContactsModal}
 					setShow={setShowAddContactsModal}
 				/>
